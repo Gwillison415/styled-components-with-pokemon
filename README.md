@@ -1,6 +1,9 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). I handled objectives like so:
+
+- research styled components and get 'dangerous' with them
+- implement a grid with multiple breakpoints as props
 
 ## Available Scripts
 
