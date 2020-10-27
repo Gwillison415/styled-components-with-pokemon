@@ -1,4 +1,6 @@
 export const USER_LOGOUT = "USER_LOGOUT";
+export const SELECT_ALL_POKE = "SELECT_ALL_POKE";
+export const SELECT_SAVED_POKE = "SELECT_SAVED_POKE";
 
 export const SIGN_UP_FAIL = "SIGN_UP_FAIL";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";

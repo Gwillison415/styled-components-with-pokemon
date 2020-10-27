@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
-import { shallowEqual, useSelector } from "react-redux";
+import * as CONST from "../redux/constants";
+
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 
 const AllPokemonButton = styled.button`
@@ -23,14 +25,26 @@ const SavedPokemonButton = styled(AllPokemonButton)`
 `;
 
 export default function HeaderControls() {
-      const nav = useSelector((state) => state.nav);
+      const nav = useSelector((state) => state.nav, shallowEqual);
+        const dispatch = useDispatch();
+
       const { selectionState } = nav
       console.log('nav', nav)
 
     return (
       <div>
-        <AllPokemonButton selectionState={selectionState} >All</AllPokemonButton>
-        <SavedPokemonButton selectionState={selectionState} >Saved</SavedPokemonButton>
-        </div>
+        <AllPokemonButton
+          onClick={() => dispatch({ type: CONST.SELECT_ALL_POKE })}
+          selectionState={selectionState}
+        >
+          All
+        </AllPokemonButton>
+        <SavedPokemonButton
+          onClick={() => dispatch({ type: CONST.SELECT_SAVED_POKE })}
+          selectionState={selectionState}
+        >
+          Saved
+        </SavedPokemonButton>
+      </div>
     );
 }
