@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - research styled components and get 'dangerous' with them
 - implement a grid with multiple breakpoints as props
+- implement a re-useable card that we can later tune-up
+- create global state container (redux) to break out HeaderControls dependency injection into other components
+- assess pokemon wrapper api and access it\'s local storage key
 
 ## Available Scripts
 

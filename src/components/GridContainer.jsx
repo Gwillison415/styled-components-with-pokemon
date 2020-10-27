@@ -1,19 +1,21 @@
 import React from "react";
+import localForage from "localforage";
 import styled from "styled-components";
-
+import { MemoizedCard } from "./Card";
 const remCaculator = (px) => `${px / 16}rem`;
+// Function for calculating value for width
 const getWidth = (value) => {
-  if (!value) return
-  let width = value / 12 * 100
-  return `width: ${width}%;`
-}
+  if (!value) return;
+  let width = (value / 12) * 100;
+  return `width: ${width}%;`;
+};
 
+// Function for calculating value for flex
 const getFlex = (value) => {
-  if (!value) return
-  let flex = value / 12 * 100
-  return `flex: 0 0 ${flex}%;`
-}
-
+  if (!value) return;
+  let flex = (value / 12) * 100;
+  return `flex: 0 0 ${flex}%;`;
+};
 
 const Container = styled.div`
   padding-right: ${remCaculator(16)};
@@ -79,29 +81,44 @@ export const Col = styled.div`
   }
 `;
 export default function GridContainer() {
-
-    return (
-      <Container>
-        <Row>
-          <Col xs="12" sm="6" lg="4" xl="2">
-1
-          </Col>
-          <Col xs="12" sm="6" lg="4" xl="2">
+  let allresults = localForage
+    .getItem("pokeapi-js-wrapper-/api/v2/pokemon/?limit=1050&offset=0")
+    .then((res) => console.log("res", res));
+  return (
+    <Container>
+      <Row>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          <MemoizedCard
+            name="hypno"
+            url={
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png"
+            }
+          ></MemoizedCard>
+        </Col>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          2
+        </Col>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          3
+        </Col>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          4
+        </Col>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          5
+        </Col>
+        <Col xs="12" sm="6" lg="4" xl="2">
+          6
+        </Col>
+      </Row>
+      {/* <Row>
+          <Col xs='12' sm="6" lg="4" xl="2" >
             2
           </Col>
-          <Col xs="12" sm="6" lg="4" xl="2">
-            3
+          <Col xs='12' sm="6" lg="4" xl="2" >
+            1
           </Col>
-          <Col xs="12" sm="6" lg="4" xl="2">
-            4
-          </Col>
-          <Col xs="12" sm="6" lg="4" xl="2">
-            5
-          </Col>
-          <Col xs="12" sm="6" lg="4" xl="2">
-            6
-          </Col>
-        </Row>
-      </Container>
-    );
+        </Row> */}
+    </Container>
+  );
 }
