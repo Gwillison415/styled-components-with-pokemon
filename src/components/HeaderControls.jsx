@@ -29,7 +29,7 @@ export default function HeaderControls() {
         const dispatch = useDispatch();
 
       const { selectionState } = nav
-      console.log('nav', nav)
+      console.log('selectionState', selectionState)
 
     return (
       <div>
