@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - make a call for nested data
 - test cache & fallback set up to read cache
 - build out a details page and the actions to switch between
-- add map and begin async call
+- add map and points
 
 ## Available Scripts
 

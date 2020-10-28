@@ -9,28 +9,25 @@ export default function Map({ currentPokeDetails }) {
   const { height, width } = useWindowSize();
   const { isLoaded } = useLoadMaps();
   const [markerLocations, setMarkerLocations] = useState([]);
+
   async function fetchLocationData() {
     const response = await axiosInstance.get(`/${currentPokeDetails.id}`);
     const { data, status } = response;
     if (status === 200) {
-      // const { current_location, status } = data;
-      console.log("data", data);
       setMarkerLocations(data.locations);
-      // setMarkerLocation({ current_location, status });
     }
   }
   useEffect(() => {
     fetchLocationData();
     return () => {};
-  }, [currentPokeDetails.id]);
+  }, []);
 
-  console.log("markerLocations", markerLocations);
   return (
     isLoaded && (
       <GoogleMap
         mapContainerStyle={{
-          height: height / 3,
-          width: width / 3,
+          height: height / 2,
+          width: width / 2,
         }}
         zoom={9}
         center={{ lat: 32.805431, lng: -117.016287 }}
@@ -43,8 +40,11 @@ export default function Map({ currentPokeDetails }) {
           fullscreenControl: false,
         }}
       >
-        {markerLocations.map((locationString) => (
-          <CustomMarker locationString={locationString}></CustomMarker>
+        {markerLocations.map((locationString, index) => (
+          <CustomMarker
+            key={locationString + index.toString()}
+            locationString={locationString}
+          ></CustomMarker>
         ))}
       </GoogleMap>
     )
