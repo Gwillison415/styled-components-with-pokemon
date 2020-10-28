@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CardContainer, { MemoizedCard } from "./Card";
+import  DetailsPage from "./DetailsPage";
 import { Row } from "./Row";
 import { Column } from "./Column";
 import { remCaculator } from "../utils/styledUtils";
@@ -31,24 +32,34 @@ const Container = styled.div`
 `;
 
 export default function GridContainer() {
-  const characterList = useSelector((state) => state.nav.results, shallowEqual);
-  const selectionState = useSelector(
-    (state) => state.nav.selectionState,
-    shallowEqual
-  );
+  const navState = useSelector((state) => state.nav, shallowEqual);
+  const { results: characterList,currentPokeDetails, selectionState } = navState;
+
 
   // console.log('allresults', allresults)
   return (
     <Container>
-      {selectionState === 'detail'? <Row>HIIIIII</Row>:<Row>
-        {characterList.map(({ name, url }, index) => {
-          return (
-            <Column key={index} xs="12" sm="6" lg="4" xl="2">
-              <CardContainer name={name} url={url}></CardContainer>
-            </Column>
-          );
-        })}
-      </Row>}
+      {selectionState === "detail" && (
+        <DetailsPage currentPokeDetails={currentPokeDetails}></DetailsPage>
+      )}
+      {selectionState === "all" && (
+        <Row>
+          {characterList.map(({ name, url }, index) => {
+            return (
+              <Column
+                key={index.toString() + name}
+                xs="12"
+                sm="6"
+                lg="4"
+                xl="2"
+              >
+                <CardContainer name={name} url={url}></CardContainer>
+              </Column>
+            );
+          })}
+        </Row>
+      )}
+      {selectionState === "saved" && <Row>saved</Row>}
     </Container>
   );
 }

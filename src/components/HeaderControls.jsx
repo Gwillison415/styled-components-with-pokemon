@@ -44,7 +44,10 @@ export default function HeaderControls() {
         const dispatch = useDispatch();
 
       const { selectionState, currentPokeDetails } = nav;
-// const handleInput
+    const handleInput = (e) => {
+        const {target:{value}} = e
+        console.log('value',value);
+    };
     return (
       <>
         <div>
@@ -70,7 +73,7 @@ export default function HeaderControls() {
           )}
         </div>
         <div>
-          <Input onChange={(e)=> {}} placeholder="Search Pokemon" size="1.5em" />
+          <Input onChange={handleInput} placeholder="Search Pokemon" size="1.5em" />
         </div>
       </>
     );
