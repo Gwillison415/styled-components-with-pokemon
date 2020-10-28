@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { getFlex, getWidth, remCaculator } from "../utils/styledUtils";
 
 export const Column = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
   padding-right: ${remCaculator(16)};
   padding-left: ${remCaculator(16)};

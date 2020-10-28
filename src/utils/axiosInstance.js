@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "•	https://api.craft-demo.net/pokemon";
+const baseURL = "https://api.craft-demo.net/pokemon";
 export const axiosInstance = axios.create({
   baseURL,
   timeout: 1000,

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState ,useEffect,} from "react";
 import { MemoizedCard } from "./Card";
 import { Row } from "./Row";
+import Map from "./Map";
 import { Column } from "./Column";
 import styled from "styled-components";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,7 @@ const Button = styled.button`
 `;
 export default function DetailsPage({ currentPokeDetails }) {
   const dispatch = useDispatch();
+  
   const pokeDictionary = useSelector(
     (state) => state.nav.savedPokeByNameId,
     shallowEqual
@@ -55,7 +57,9 @@ export default function DetailsPage({ currentPokeDetails }) {
         <div> Weight: {currentPokeDetails.weight} </div>
         <AppropriateButton></AppropriateButton>
       </Column>
-      <Column xs="12" sm="9" md="8" lg="7"></Column>
+      <Column xs="12" sm="9" md="8" lg="7">
+        <Map currentPokeDetails={currentPokeDetails}></Map>
+      </Column>
     </Row>
   );
 }

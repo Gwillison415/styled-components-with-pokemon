@@ -33,7 +33,7 @@ const Container = styled.div`
 
 export default function GridContainer() {
   const navState = useSelector((state) => state.nav, shallowEqual);
-  const { results: characterList,currentPokeDetails, selectionState } = navState;
+  const {savedPoke, results: characterList,currentPokeDetails, selectionState } = navState;
 
 
   // console.log('allresults', allresults)
@@ -46,20 +46,30 @@ export default function GridContainer() {
         <Row>
           {characterList.map(({ name, url }, index) => {
             return (
-              <Column
-                key={index.toString() + name}
-                xs="12"
-                sm="6"
-                lg="4"
-                xl="2"
-              >
+              <Column key={index.toString() + url} xs="12" sm="4" lg="2" xl="1">
                 <CardContainer name={name} url={url}></CardContainer>
               </Column>
             );
           })}
         </Row>
       )}
-      {selectionState === "saved" && <Row>saved</Row>}
+      {selectionState === "saved" && (
+        <Row>
+          {savedPoke.map((cardProps) => {
+            return (
+              <Column
+                key={ cardProps.id}
+                xs="12"
+                sm="6"
+                lg="4"
+                xl="2"
+              >
+                <MemoizedCard {...cardProps}></MemoizedCard>
+              </Column>
+            );
+          })}
+        </Row>
+      )}
     </Container>
   );
 }

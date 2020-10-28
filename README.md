@@ -9,7 +9,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - assess pokemon wrapper api and access it\'s local storage key
 - make a call for nested data
 - test cache & fallback set up to read cache
-- 
+- build out a details page and the actions to switch between
+- add map and begin async call
 
 ## Available Scripts
 

@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
         selectionState: "detail",
       };
     case CONST.REMOVE_POKE_FROM_BAG:
-      console.log("action.payload", action.payload);
       const removalName = action.payload.name;
       const filteredBag = state.savedPoke.filter(
         ({ name }) => name !== removalName
