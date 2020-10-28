@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import CardContainer,{ MemoizedCard } from "./Card";
-import {Row} from "./Row";
+import CardContainer, { MemoizedCard } from "./Card";
+import { Row } from "./Row";
 import { Column } from "./Column";
 import { remCaculator } from "../utils/styledUtils";
+import { shallowEqual, useSelector } from "react-redux";
 
 const Container = styled.div`
   padding-right: ${remCaculator(16)};
@@ -29,29 +30,21 @@ const Container = styled.div`
   }
 `;
 
-
-
-
 export default function GridContainer() {
+  const characterList = useSelector((state) => state.nav.results, shallowEqual);
 
-    // console.log('allresults', allresults)
+  // console.log('allresults', allresults)
   return (
     <Container>
       <Row>
-        <Column xs="12" sm="6" lg="4" xl="2">
-          {/* <CardContainer name={name} url={url} >
-
-          </CardContainer> */}
-        </Column>
+        {characterList.map(({ name, url }, index) => {
+          return (
+            <Column key={index} xs="12" sm="6" lg="4" xl="2">
+              <CardContainer name={name} url={url}></CardContainer>
+            </Column>
+          );
+        })}
       </Row>
-      {/* <Row>
-          <Column xs='12' sm="6" lg="4" xl="2" >
-            2
-          </Column>
-          <Column xs='12' sm="6" lg="4" xl="2" >
-            1
-          </Column>
-        </Row> */}
     </Container>
   );
 }

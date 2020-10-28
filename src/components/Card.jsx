@@ -20,21 +20,24 @@ export default function CardContainer(props) {
   );
 }
 
+const Image = styled.img.attrs((props) => ({
+  src: props.src,
+  alt: props.src + "image",
+}))`
+  height: 64px;
+  width: 64px;
+`;
+const ImageContainer = styled.div``;
 export function Card({ name,  height, weight, img }) {
-  const Image = styled.img.attrs((props) => ({
-    src: props.src,
-    alt: props.src + "image",
-  }))`
-    height: 64px;
-    width: 64px;
-  `;
-  const ImageContainer = styled.div``;
+  const handleClick =() => {
+    
+  }
   return (
     <div>
       <ImageContainer>
         {img &&(<Image src={img}></Image>)}
       </ImageContainer>
-      <div>Card name: {name}</div>
+      <div>{name}</div>
     </div>
   );
 }
