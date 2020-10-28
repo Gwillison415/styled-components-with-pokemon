@@ -23,28 +23,55 @@ const SavedPokemonButton = styled(AllPokemonButton)`
     props.selectionState === "saved" ? "red" : "white"};
   color: ${(props) => (props.selectionState === "saved" ? "white" : "red")};
 `;
+const DetailPokemonButton = styled(AllPokemonButton)`
+  background: ${(props) =>
+    props.selectionState === "detail" ? "red" : "white"};
+  color: ${(props) => (props.selectionState === "detail" ? "white" : "red")};
+`;
+
+const Input = styled.input.attrs((props) => ({
+  type: "text",
+  size: props.size || "1em",
+}))`
+  border: 2px solid blue;
+  margin: ${(props) => props.size};
+  padding: ${(props) => props.size};
+`;
+
 
 export default function HeaderControls() {
       const nav = useSelector((state) => state.nav, shallowEqual);
         const dispatch = useDispatch();
 
-      const { selectionState } = nav
-      console.log('selectionState', selectionState)
-
+      const { selectionState, currentPokeDetails } = nav;
+// const handleInput
     return (
-      <div>
-        <AllPokemonButton
-          onClick={() => dispatch({ type: CONST.SELECT_ALL_POKE })}
-          selectionState={selectionState}
-        >
-          All
-        </AllPokemonButton>
-        <SavedPokemonButton
-          onClick={() => dispatch({ type: CONST.SELECT_SAVED_POKE })}
-          selectionState={selectionState}
-        >
-          Saved
-        </SavedPokemonButton>
-      </div>
+      <>
+        <div>
+          <AllPokemonButton
+            onClick={() => dispatch({ type: CONST.SELECT_ALL_POKE })}
+            selectionState={selectionState}
+          >
+            All
+          </AllPokemonButton>
+          <SavedPokemonButton
+            onClick={() => dispatch({ type: CONST.SELECT_SAVED_POKE })}
+            selectionState={selectionState}
+          >
+            Saved
+          </SavedPokemonButton>
+          {currentPokeDetails.hasOwnProperty("name") && (
+            <DetailPokemonButton
+              onClick={() => dispatch({ type: CONST.SELECT_POKE_DETAIL })}
+              selectionState={selectionState}
+            >
+              {currentPokeDetails.name + "'s details"}
+            </DetailPokemonButton>
+          )}
+        </div>
+        <div>
+          <Input onChange={(e)=> {}} placeholder="Search Pokemon" size="1.5em" />
+        </div>
+      </>
     );
 }

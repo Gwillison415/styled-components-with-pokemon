@@ -4,23 +4,37 @@ const initialState = {
   selectionState: "all",
   results: [],
   savedPoke: [],
-  savedPokeById: {},
+  pokeByNameId: {},
+  savedPokeByNameId: {},
   currentPokeDetails: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CONST.CONST.SELECT_ALL_POKE:
+    case CONST.SELECT_ALL_POKE:
       // const {refreshToken, otherPayload} = objectToDestruct
       return {
         ...state,
         selectionState: "all",
       };
-    case CONST.CONST.SELECT_SAVED_POKE:
+    case CONST.SELECT_POKE_DETAIL:
+      // const {refreshToken, otherPayload} = objectToDestruct
+      return {
+        ...state,
+        selectionState: "detail",
+      };
+    case CONST.SELECT_SAVED_POKE:
       // const {refreshToken, otherPayload} = objectToDestruct
       return {
         ...state,
         selectionState: "saved",
+      };
+    case CONST.SELECT_CURRENT_POKE:
+      // const {refreshToken, otherPayload} = objectToDestruct
+      return {
+        ...state,
+        currentPokeDetails: { ...action.payload },
+        selectionState: "detail",
       };
     case CONST.READ_LOCAL_STORAGE:
       // const {refreshToken, otherPayload} = objectToDestruct
@@ -28,7 +42,11 @@ export default (state = initialState, action) => {
         ...state,
       };
     case CONST.READ_NEW_DATA:
-      // const {refreshToken, otherPayload} = objectToDestruct
+      const { results } = action.response;
+      console.log("results", results);
+      results.forEach(({ name, url }) => {
+        state.pokeByNameId[name] = { name, url };
+      });
       return {
         ...state,
         ...action.response,

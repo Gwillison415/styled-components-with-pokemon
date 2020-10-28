@@ -32,11 +32,15 @@ const Container = styled.div`
 
 export default function GridContainer() {
   const characterList = useSelector((state) => state.nav.results, shallowEqual);
+  const selectionState = useSelector(
+    (state) => state.nav.selectionState,
+    shallowEqual
+  );
 
   // console.log('allresults', allresults)
   return (
     <Container>
-      <Row>
+      {selectionState === 'detail'? <Row>HIIIIII</Row>:<Row>
         {characterList.map(({ name, url }, index) => {
           return (
             <Column key={index} xs="12" sm="6" lg="4" xl="2">
@@ -44,7 +48,7 @@ export default function GridContainer() {
             </Column>
           );
         })}
-      </Row>
+      </Row>}
     </Container>
   );
 }

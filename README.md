@@ -8,7 +8,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - create global state container (redux) to break out HeaderControls dependency injection into other components
 - assess pokemon wrapper api and access it\'s local storage key
 - make a call for nested data
-- test cache & fallback set up
+- test cache & fallback set up to read cache
+- 
 
 ## Available Scripts
 

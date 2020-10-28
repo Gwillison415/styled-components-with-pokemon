@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import * as CONST from "../redux/constants";
+
 const Pokedex = require("pokeapi-js-wrapper");
 const P = new Pokedex.Pokedex();
+
 export default function CardContainer(props) {
-  const { name, url } = props
-  const [details, setDetails] = useState({img:false});
+  const { url } = props;
+  const [details, setDetails] = useState({ img: false });
   P.resource(url).then((data) => {
     const {
       sprites: { front_default: img },
@@ -16,7 +20,7 @@ export default function CardContainer(props) {
   return details.img ? (
     <MemoizedCard {...props} {...details} />
   ) : (
-    <Card {...props}/>
+    <Card {...props} />
   );
 }
 
@@ -27,15 +31,23 @@ const Image = styled.img.attrs((props) => ({
   height: 64px;
   width: 64px;
 `;
-const ImageContainer = styled.div``;
-export function Card({ name,  height, weight, img }) {
-  const handleClick =() => {
-    
-  }
+const ImageContainer = styled.div`
+  cursor: pointer;
+`;
+export function Card({ name, height, weight, img }) {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    console.log('name, height, weight, img ', name, height, weight, img )
+    dispatch({
+      type: CONST.SELECT_CURRENT_POKE,
+      payload: { name, height, weight, img },
+    });
+  };
   return (
     <div>
-      <ImageContainer>
-        {img &&(<Image src={img}></Image>)}
+      <ImageContainer onClick={handleClick}>
+        {img && <Image src={img}></Image>}
       </ImageContainer>
       <div>{name}</div>
     </div>
