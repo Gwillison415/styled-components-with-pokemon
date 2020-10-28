@@ -17,9 +17,10 @@ export default function CardContainer(props) {
           sprites: { front_default: img },
           height,
           weight,
+          id
         } = data;
         if (mounted) {
-          setDetails({ height, weight, img });
+          setDetails({ id,height, weight, img });
         }
       })
       .catch((err) => console.log("err", err));
@@ -44,14 +45,13 @@ const Image = styled.img.attrs((props) => ({
 const ImageContainer = styled.div`
   cursor: pointer;
 `;
-export function Card({ name, height, weight, img }) {
+export function Card({id, name, height, weight, img }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log("name, height, weight, img ", name, height, weight, img);
     dispatch({
       type: CONST.SELECT_CURRENT_POKE,
-      payload: { name, height, weight, img },
+      payload: {id, name, height, weight, img },
     });
   };
   return (
